@@ -1,1 +1,1 @@
-# portal-orçamentario-Sergipe
+# portal-Estratégico-Sergipe
