@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tab.css">
+    <link rel="stylesheet" href="responsive.css">
+    <title>Portal de Monitoramento Estratégico - Sergipe / JS_Softwares </title>
+</head>
+
+<body> <div id="tela-inicial">
+        <header>
+            <div class="logos">
+                <img src="images/NOME.svg" alt="Brasão de Sergipe" class="logo">
+                <img src="images/SERGIPE LOGO.svg" alt="Logo do Governo de Sergipe" class="logo">
+            </div>
+
+            <div class="tela-menu"> 
+                <div class="titulo">
+                    <h1 class="h1">Portal  de Monitoramento Estratégico</h1>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="imagem-lateral">
+                <video autoplay muted loop playsinline class="video-fundo">
+                    <source src="images\video l.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <main class="container" id="button-container">
+            <div class="container-botoes"> 
+                <button class="card-botao" onclick="abrirPainel('https://app.powerbi.com/view?r=eyJrIjoiZTdlNGE1MDgtZjA0OC00ZWVlLTg4ZDAtYjc1NmUyMzlkMjhjIiwidCI6ImExYTA1MzAxLWJkMzEtNDI3NS05ODk5LTUzZmZiN2M1YjgyZCJ9')">
+                    <img src="FIGURAS/RECEITA.png" alt="Receitas">
+                    Painel de Monitoramento Estratégico
+                </button>
+
+            </div>
+        </main>
+    </div> <div id="tela-painel" style="display: none;">
+        <header class="cabecalho-painel">
+            <button class="btn-voltar" onclick="voltarMenu()">
+                ←   Voltar a Lista de Painéis
+            </button>
+        </header>
+        
+        <div class="iframe-container">
+            <iframe id="iframe-powerbi" src="" frameborder="0" allowFullScreen="true"></iframe>
+        </div>
+    </div>
+
+
+   <script>
+        function abrirPainel(url) {
+            // Esconde explicitamente os componentes principais do menu
+            document.querySelector('header:not(.cabecalho-painel)').style.display = 'none';
+            document.querySelector('section').style.display = 'none';
+            document.querySelector('main').style.display = 'none';
+            
+            // Caso exista uma div englobando tudo, tenta esconder também
+            var telaInicial = document.getElementById('tela-inicial');
+            if(telaInicial) telaInicial.style.display = 'none';
+            
+            // Mostra o painel (usando flex para respeitar o flex-direction: column)
+            var telaPainel = document.getElementById('tela-painel');
+            telaPainel.style.display = 'flex';
+            
+            // Carrega a URL no iframe
+            document.getElementById('iframe-powerbi').src = url;
+        }
+
+        function voltarMenu() {
+            // Esconde o painel
+            document.getElementById('tela-painel').style.display = 'none';
+            
+            // Restaura os componentes principais do menu
+            document.querySelector('header:not(.cabecalho-painel)').style.display = 'flex'; // Volta ao display original (flex)
+            document.querySelector('section').style.display = 'block';
+            document.querySelector('main').style.display = 'flex'; // Volta ao display original (flex)
+            
+            // Se usou a div englobando tudo, restaura também
+            var telaInicial = document.getElementById('tela-inicial');
+            if(telaInicial) telaInicial.style.display = 'block';
+            
+            // Limpa o iframe
+            document.getElementById('iframe-powerbi').src = '';
+        }
+    </script>
+
+</body> </html>
